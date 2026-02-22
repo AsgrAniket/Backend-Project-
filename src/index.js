@@ -1,11 +1,32 @@
 // require ('dotenv').config({path: './env'})
-import dotenv from "dotenv"
-import connectDB from "./db/index";
+import 'dotenv/config';
+import connectDB from "./db/index.js";
+import dns from "node.dns";
 
-dotenv.config({path: './env'})
+dns.setServers(['8.8.8.8', '1.1.1.1']);
+
+// console.log("MONGODB_URI:", process.env.MONGODB_URI);
+// dotenv.config({
+//     path:  "./env"
+// })
 
 
 connectDB()
+.then(() => {
+    app.on("error", (error) => {
+        console.log("ERRR: ", error);
+        throw error
+    })
+    app.listen(process.env.PORT || 8000, () => {
+        console.log(`Server is running at port : ${process.env.PORT}`);
+    })
+})
+.catch((err) => {
+    console.log("MONGO db connection failed !!! ", err);
+})
+
+
+
 
 // import express from "express";
 // const app = ecpress()
