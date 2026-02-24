@@ -1,14 +1,13 @@
 // require ('dotenv').config({path: './env'})
 import 'dotenv/config';
 import connectDB from "./db/index.js";
-import dns from "node.dns";
+import dns from 'node:dns/promises';
+import express from "express";
 
-dns.setServers(['8.8.8.8', '1.1.1.1']);
+dns.setServers(['1.1.1.1', '8.8.8.8']);
+const app = express(); // app Intialized 
 
 // console.log("MONGODB_URI:", process.env.MONGODB_URI);
-// dotenv.config({
-//     path:  "./env"
-// })
 
 
 connectDB()
